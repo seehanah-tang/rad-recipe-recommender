@@ -1,0 +1,44 @@
+.my-friendlist{
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    padding: 10px;
+    text-align: justify;
+    width: [width of img];
+}
+
+.my-friendlist div img{
+    padding:5px;
+    width:auto;
+}
+
+.friend-title{
+    display: block;
+    width: 200px;
+}
+
+
+.friends-div{
+    display:block;
+    width: 75%;
+    height: 50px;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-size: larger;
+    margin:auto;
+}
+.add-friends-button{
+    display: block;
+    height: 50px;
+    width:25%;
+    margin: auto;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-size: large;
+}
+.friend-text{
+    display:block;
+    width:40%;
+    margin-left:45%;
+    font-size: larger;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    padding: 10px;
+}

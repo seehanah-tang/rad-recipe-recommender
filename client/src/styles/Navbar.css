@@ -1,0 +1,25 @@
+/* CSS used from https://www.w3schools.com/css/css_navbar_horizontal.asp */
+ul {
+    display:flex;
+    justify-content:space-evenly;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #C7DCBB;
+  }
+  
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: #601B14;
+  padding: 14px 74px;
+  font-family: fantasy;
+  text-decoration: underline;
+}
+
+li a:hover {
+  background-color: #9EB497;
+}

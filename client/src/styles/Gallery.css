@@ -1,0 +1,52 @@
+
+.my-recipelist{
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    padding: 10px;
+    text-align: justify;
+    width: [width of img];
+}
+
+.my-recipelist div img{
+    padding:5px;
+    width:auto;
+}
+
+.recipe-title{
+    display: block;
+    width: 200px;
+}
+
+.user-id-search{
+    display:block;
+    width: 75%;
+    height: 50px;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-size: larger;
+    margin:auto;
+}
+
+.user-text{
+    display:block;
+    width:40%;
+    margin-left:36%;
+    font-size: larger;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    padding: 10px;
+}
+
+.user-div{
+    display:block;
+    margin:auto;
+}
+
+.gallery-button{
+    display: block;
+    height: 50px;
+    width:25%;
+    margin: auto;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-size: large;
+
+}

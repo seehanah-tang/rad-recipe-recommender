@@ -1,0 +1,48 @@
+/* Styling for buttons and gradient */
+button {
+    background-color: #C7DCBB;
+    color: #601B14;
+    border:none;
+    text-decoration: none;
+    display: inline;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+    padding: 14px 16px;
+    border-radius: 50px;
+}
+
+button:hover {
+    background-color: #9EB497;
+}
+
+body {
+    color:#601B14;
+    background: rgb(254,252,252);
+    background: linear-gradient(rgba(254,252,252,1) 2%, rgba(254,245,240,1) 29%, rgba(253,231,210,1) 84%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.my-recipelist{
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    padding: 10px;
+    text-align: justify;
+    width: [width of img];
+}
+
+.my-recipelist div img{
+    padding:5px;
+    width:auto;
+}
+
+.recipe-title{
+    display: block;
+    width: 200px;
+}
+
+.edit-section{
+    display: none;
+}

@@ -1,0 +1,17 @@
+/* CSS below is for having the image and title together */
+#flex-box {
+    display:flex;
+    flex-direction: row;
+    font-size:25px;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    background-color: #C7DCBB;
+  }
+
+#flex-box p {
+    margin:auto;
+}
+  
+#flex-box img {
+    height:5%;
+    width:5%;
+}

@@ -1,0 +1,50 @@
+.search {
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    padding: 10px;
+    text-align: justify;
+    width: [width of img];
+  }
+
+.search div img{
+    padding:5px;
+    width:auto;
+  
+}
+.image-title{
+  display:block;
+  width: 200px;
+  margin:0px;
+}
+
+.search-input-box{
+  display: block;
+  width: 75%;
+  height: 30px;
+  align-content: center;
+  margin:auto;
+  padding-top: 10px;
+  font-size: large;
+
+}
+
+.search-bar-input{
+  display:block;
+  width:75%;
+  margin:auto;
+  padding-top: 10px;
+
+}
+.search-button{
+  margin: auto;
+  display: block;
+  align-self: center;
+  width:40%;
+  height: 50px;
+}
+
+.add-button{
+  display: block;
+  margin:auto;
+}
