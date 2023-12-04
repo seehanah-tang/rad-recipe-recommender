@@ -17,7 +17,7 @@ const dictCounter = (array : string[]) => {
 
 function Recommendations(userObject : any) {
     const [recommendList, setRecommendList] = useState<any[]>([])
-    useEffect(() => {if (user !== undefined && user !== null) {console.log('loading'); loadRecommendations()}}, [userObject.userObject])
+    //useEffect(() => {if (user !== undefined && user !== null) {console.log('loading'); loadRecommendations()}}, [userObject.userObject])
     
 
     let user : UserData = userObject.userObject
