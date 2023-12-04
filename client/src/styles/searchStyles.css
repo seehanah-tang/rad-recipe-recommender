@@ -3,6 +3,7 @@
     flex-direction:row;
     flex-wrap: wrap;
     padding: 10px;
+    margin:10px;
     text-align: justify;
     width: [width of img];
   }
@@ -38,6 +39,7 @@
 }
 .search-button{
   margin: auto;
+  margin-top:10px;
   display: block;
   align-self: center;
   width:40%;
