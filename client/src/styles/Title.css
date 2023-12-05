@@ -1,10 +1,13 @@
 /* CSS below is for having the image and title together */
 #flex-box {
     display:flex;
+    height:50px;
     flex-direction: row;
     font-size:25px;
     font-family: "Comic Sans MS", "Comic Sans", cursive;
     background-color: #C7DCBB;
+    margin-bottom: 0;
+    font-weight: bold;
   }
 
 #flex-box p {
@@ -12,6 +15,6 @@
 }
   
 #flex-box img {
-    height:5%;
+    height:15%;
     width:5%;
 }

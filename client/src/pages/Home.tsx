@@ -169,12 +169,13 @@ function Home() {
           <Title />
         </div>
         <div className="content">
-          <p>Recommended Recipes (based on your friends)!</p>
-          <Recommendations userObject={fbUser}></Recommendations>
+          <div className="left-item">
+            Recommended Recipes (based on your friends)!
+            <Recommendations userObject={fbUser}></Recommendations>
+          </div>
 
-          <div className="userBox">
+          <div className="right-item">
             <p className="userWelcome">Welcome {name ?? fbUser?.name}! </p>
-
             <div className="userWelcome">
               <img
                 src={googleUser?.photoURL as string}
@@ -217,10 +218,9 @@ function Home() {
               <div className="my-recipelist" aria-label="my recipelist">
                 {userList}
               </div>
+              <p>Incoming Friends Below</p>
+              <div>{incomingFriends}</div>
             </div>
-
-            <p>Incoming Friends Below</p>
-            <div>{incomingFriends}</div>
           </div>
         </div>
       </div>

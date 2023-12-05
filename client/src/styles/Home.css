@@ -1,47 +1,62 @@
 /* Styling for buttons and gradient */
 button {
-    background-color: #C7DCBB;
+    background-color: #96c27c;
     color: #601B14;
-    border:none;
+    border:100px;
     text-decoration: none;
     display: inline;
     flex-direction: row;
     flex-wrap: wrap;
     text-align: center;
     padding: 14px 16px;
-    border-radius: 50px;
+    border-radius: 200px;
+    font-weight: bold;
 }
 
 button:hover {
     background-color: #9EB497;
 }
 
-.userBox {
-    background-color:black;
-    opacity:80%;
-    width:50vw;
-    float:right;
+.content{
+    display:flex;
+    justify-content: space-between;
+}
+
+.left-item, .right-item {
+    align-self: flex-start;
+}
+
+
+.left-item{
+    flex:4;
+    background-image:url("food2.jpg");   
+    /* background-repeat:repat; */
     height:100vh;
+    font-weight: bold;
+}
+
+
+.right-item{
+    background-color:rgb(208, 210, 133);
+    opacity:100%;
+    height:100vh;
+    margin-top: 0;
+    font-weight:bold;
 }
 
 .userWelcome {
-    text-align:right;
+    text-align:left;
     margin-right:50px;
+    margin-left:10px;
 }
 
-.homepage {
+/* .homepage {
     background-image:url("food2.jpg");
-    /* background-repeat:repat; */
     height:100vh;
-
-}
-
-.content{
-    display:flex;
-}
+} */
 
 body {
-    color:#601B14;
+    color:#342c05;
     background-repeat: no-repeat;
     background-size: cover;
 }
