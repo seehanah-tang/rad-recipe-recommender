@@ -123,12 +123,22 @@ function CreateSearchResults(
   let imDiv = [];
   if (data[0] !== undefined) {
     for (let i = 0; i < data.length; i++) {
+      let sourceURL = "";
+      fetch(
+        "https://api.spoonacular.com/recipes/" +
+          data[i].id +
+          "/information?apiKey=" +
+          API_KEY +
+          "includeNutrition=false"
+      )
+        .then((r) => r.json())
+        .then((responseObject) => (sourceURL = responseObject.sourceUrl));
       imDiv.push(
         <div>
           <ControlledImage
-            link={data[i].images.jpg.image_url}
+            link={data[i].image}
             altText={"cover picture of " + data[i].title}
-            malLink={data[i].url}
+            malLink={sourceURL}
           />
           <br></br>
           <ControlledTitle title={data[i].title} />
@@ -139,19 +149,11 @@ function CreateSearchResults(
                 const ref = data[i];
                 try {
                   const recipeBlock: RecipeData = {
-                    mal_id: parseInt(ref.mal_id),
+                    id: parseInt(ref.id),
                     title: ref.title,
-                    thumbnail: ref.images.jpg.image_url,
+                    thumbnail: ref.image,
                     url: ref.url,
-                    genres: ref.genres.map(function (genre: any) {
-                      return genre.name;
-                    }),
-                    status: ref.status,
-                    score: parseFloat(ref.score),
-                    scored_by: parseInt(ref.scored_by),
-                    rank: parseInt(ref.rank),
-                    broadcast_day: ref.broadcast.day,
-                    broadcast_time: ref.broadcast.time,
+                    // cuisine: ,
                   };
                   addToAcc(recipeBlock);
                 } catch (error) {
@@ -220,17 +222,17 @@ export default function SearchPage() {
     // setData([])
     setItemList([]);
     const getInfo = () => {
-      // TODO: edit this fetch for spoonacular API
+      // TODO: edit this for more filters
       fetch(
         "https://api.spoonacular.com/recipes/complexSearch?apiKey=" +
           API_KEY +
           "&query=" +
-          term
-        //  + "&cuisine=" +
-        // cuisine
+          term +
+          //  "&cuisine=" +
+          // cuisine
+          "&number=10"
       )
         .then((r) => r.json())
-        // fetch("https://api.jikan.moe/v4/anime?q=" + term?.replaceAll(" ", "+") + "&sfw&limit=10").then(r => r.json())
         .then((jr) => {
           var newData: any[] = [];
           for (let i = 0; i < 10; i++) {
