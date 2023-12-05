@@ -26,6 +26,7 @@ function returnListByID(id : string, iSetter : (newItems : any[]) => any) {
                                     alt= {"cover picture of " + recList[i].title}
                                     onClick={() => {window.open(recList[i].url)}}/>
                                 <br></br>
+                                
                                 <div className='recipe-title' aria-label='recipe title'>{recList[i].title}</div>
                                 <button onClick={() => {
                                     devRef.doc(id).update({
@@ -163,45 +164,66 @@ function Home() {
     const [name, setName] = useState<string | undefined>(undefined)
 
     return (
+      <div className="homepage">
         <div>
-            <Title />
-            <Navbar/>
-            <p>Hi! Welcome to the home page!</p>
-            <p>Welcome {name ?? fbUser?.name}! </p>
+          <Title />
+        </div>
+        <div className="content">
+          <p>Recommended Recipes (based on your friends)!</p>
+          <Recommendations userObject={fbUser}></Recommendations>
 
-            <div>
-                <img src= {googleUser?.photoURL as string} referrerPolicy="no-referrer"/>
-                <br></br>
-                <p>User ID: {fbUser?.id}</p> 
+          <div className="userBox">
+            <p className="userWelcome">Welcome {name ?? fbUser?.name}! </p>
 
-                <div>
-                    <button onClick = {() => {const change = document.getElementById('editBox')
-                                        if(change instanceof HTMLElement) {change.style.display = 'block'}}}> 
-                                        Edit Profile </button>
-                    <button onClick={() => {signOut(auth)}}> Log Out </button>
-                </div>
-                
-                <br></br>
+            <div className="userWelcome">
+              <img
+                src={googleUser?.photoURL as string}
+                referrerPolicy="no-referrer"
+              />
+              <br></br>
+              <p>User ID: {fbUser?.id}</p>
 
-                <EditBox localName={name} localSetName={setName} ariaLabel='box to edit username'/>
-                
+              <div>
+                <button
+                  onClick={() => {
+                    const change = document.getElementById("editBox");
+                    if (change instanceof HTMLElement) {
+                      change.style.display = "block";
+                    }
+                  }}
+                >
+                  Edit Profile{" "}
+                </button>
+                <button
+                  onClick={() => {
+                    signOut(auth);
+                  }}
+                >
+                  {" "}
+                  Log Out{" "}
+                </button>
+              </div>
+
+              <br></br>
+
+              <EditBox
+                localName={name}
+                localSetName={setName}
+                ariaLabel="box to edit username"
+              />
             </div>
-
-            <p>Your Recipelist!</p>
-            <div 
-                className='my-recipelist'
-                aria-label='my recipelist'>
+            <div className="userWelcome">
+              <p>Your Recipelist!</p>
+              <div className="my-recipelist" aria-label="my recipelist">
                 {userList}
+              </div>
             </div>
-
-            <p>Recommended Recipes (based on your friends)!</p>
-            <Recommendations userObject={fbUser}></Recommendations>
-
 
             <p>Incoming Friends Below</p>
             <div>{incomingFriends}</div>
-
+          </div>
         </div>
+      </div>
     );
   }
   

@@ -16,12 +16,34 @@ button:hover {
     background-color: #9EB497;
 }
 
+.userBox {
+    background-color:black;
+    opacity:80%;
+    width:50vw;
+    float:right;
+    height:100vh;
+}
+
+.userWelcome {
+    text-align:right;
+    margin-right:50px;
+}
+
+.homepage {
+    background-image:url("food2.jpg");
+    /* background-repeat:repat; */
+    height:100vh;
+
+}
+
+.content{
+    display:flex;
+}
+
 body {
     color:#601B14;
-    background: rgb(254,252,252);
-    background: linear-gradient(rgba(254,252,252,1) 2%, rgba(254,245,240,1) 29%, rgba(253,231,210,1) 84%);
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-size: cover;
 }
 
 .my-recipelist{
