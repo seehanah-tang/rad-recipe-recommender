@@ -115,7 +115,7 @@ function ControlledTitle({ title }: ControlledTitleProps) {
  * @param setItems part of the hook that we use to set the list of react element sop that thay can be displayed.
  * @param addToAcc adds the recipe block that we create for each show to a person's recipe list if they want it.
  */
-function CreateSearchResults(
+async function CreateSearchResults(
   data: any[],
   setItems: (itemList: any[]) => any,
   addToAcc: (recipeBlock: RecipeData) => any
@@ -124,48 +124,59 @@ function CreateSearchResults(
   if (data[0] !== undefined) {
     for (let i = 0; i < data.length; i++) {
       let sourceURL = "";
-      fetch(
-        "https://api.spoonacular.com/recipes/" +
-          data[i].id +
-          "/information?apiKey=" +
-          API_KEY +
-          "includeNutrition=false"
-      )
-        .then((r) => r.json())
-        .then((responseObject) => (sourceURL = responseObject.sourceUrl));
-      imDiv.push(
-        <div>
-          <ControlledImage
-            link={data[i].image}
-            altText={"cover picture of " + data[i].title}
-            malLink={sourceURL}
-          />
-          <br></br>
-          <ControlledTitle title={data[i].title} />
-          <button
-            className="add-button"
-            onClick={() => {
-              if (data[i] !== undefined) {
-                const ref = data[i];
-                try {
-                  const recipeBlock: RecipeData = {
-                    id: parseInt(ref.id),
-                    title: ref.title,
-                    thumbnail: ref.image,
-                    url: ref.url,
-                    // cuisine: ,
-                  };
-                  addToAcc(recipeBlock);
-                } catch (error) {
-                  console.log(error);
+      try {
+        const response = await fetch(
+          "https://api.spoonacular.com/recipes/" +
+            data[i].id +
+            "/information?apiKey=" +
+            API_KEY +
+            "&includeNutrition=false"
+        );
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const responseObject = await response.json();
+        sourceURL = responseObject.sourceUrl;
+
+        imDiv.push(
+          <div>
+            <ControlledImage
+              link={data[i].image}
+              altText={"cover picture of " + data[i].title}
+              malLink={sourceURL}
+            />
+            <br></br>
+            <ControlledTitle title={data[i].title} />
+            <button
+              className="add-button"
+              onClick={() => {
+                if (data[i] !== undefined) {
+                  const ref = data[i];
+                  try {
+                    const recipeBlock: RecipeData = {
+                      id: parseInt(ref.id),
+                      title: ref.title,
+                      thumbnail: ref.image,
+                      url: ref.url,
+                      // cuisine: ,
+                    };
+                    addToAcc(recipeBlock);
+                  } catch (error) {
+                    console.log(error);
+                  }
                 }
-              }
-            }}
-          >
-            Add to Your Recipe Collection
-          </button>
-        </div>
-      );
+              }}
+            >
+              Add to Your Recipe Collection
+            </button>
+          </div>
+        );
+      } catch (error) {
+        console.error("Error fetching source URL:", error);
+      }
+    
     }
     setItems(imDiv);
   } else {
@@ -181,8 +192,8 @@ function CreateSearchResults(
 
 export default function SearchPage() {
   //Hooks are created in order to update search term, image links, titles, etc.
-  const [term, setTerm] = useState<string>();
-  const [cuisine, setCuisine] = useState<string>();
+  const [term, setTerm] = useState<string>("");
+  const [cuisine, setCuisine] = useState<string>("");
   // const [data, setData] = useState<any[]>([])
   const [itemList, setItemList] = useState<any[]>([]);
   const [googleUser, setGoogleUser] = useState<any>(null);
@@ -218,7 +229,6 @@ export default function SearchPage() {
 
   // This use effect function updates on the search term and displays new search results as necessary
   useEffect(() => {
-    console.log("usefx run");
     // setData([])
     setItemList([]);
     const getInfo = () => {
@@ -236,9 +246,8 @@ export default function SearchPage() {
         .then((jr) => {
           var newData: any[] = [];
           for (let i = 0; i < 10; i++) {
-            newData.push(jr.data[i]);
+            newData.push(jr.results[i]);
           }
-          console.log(newData);
           return newData;
         })
         .then((dataBlock) => {
@@ -247,6 +256,7 @@ export default function SearchPage() {
     };
     getInfo();
   }, [term]);
+
 
   return (
     <div>
