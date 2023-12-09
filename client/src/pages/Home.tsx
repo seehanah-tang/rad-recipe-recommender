@@ -167,6 +167,7 @@ function Home() {
       <div className="homepage">
         <div>
           <Title />
+          <Navbar />
         </div>
         <div className="content">
           <div className="left-item">
@@ -214,11 +215,11 @@ function Home() {
               />
             </div>
             <div className="userWelcome">
-              <p>Your Recipelist!</p>
+              <p>Your Recipe List:</p>
               <div className="my-recipelist" aria-label="my recipelist">
                 {userList}
               </div>
-              <p>Incoming Friends Below</p>
+              <p>Incoming Friend Requests:</p>
               <div>{incomingFriends}</div>
             </div>
           </div>

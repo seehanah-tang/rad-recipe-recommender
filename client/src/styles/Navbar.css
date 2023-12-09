@@ -16,8 +16,8 @@ li a {
   display: block;
   color: #601B14;
   padding: 14px 74px;
-  font-family: fantasy;
-  text-decoration: underline;
+  font-family: cursive;
+  font-weight:bold;
 }
 
 li a:hover {

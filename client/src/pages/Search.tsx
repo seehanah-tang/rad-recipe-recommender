@@ -49,6 +49,7 @@ function InputBox({ addSearchTerm }: InputBoxProps) {
     <div className="search-bar">
       <div className="search-bar-input">
         <fieldset>
+          <div className="user-text">Search for recipes!</div>
           <ControlledInput
             value={value}
             setValue={setValue}
@@ -247,15 +248,17 @@ export default function SearchPage() {
   }, [term]);
 
   return (
-    <div>
+    <div className="searchContainer">
       <Title />
       <Navbar />
-      <InputBox
-        addSearchTerm={(guess: string) => {
-          setTerm(guess);
-        }}
-      />
-      <div className="search">{itemList}</div>
+      <div className="everything-else">
+        <InputBox
+          addSearchTerm={(guess: string) => {
+            setTerm(guess);
+          }}
+        />
+        <div className="search">{itemList}</div>
+      </div>
     </div>
   );
 }

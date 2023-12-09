@@ -6,7 +6,20 @@
     margin:10px;
     text-align: justify;
     width: [width of img];
+
+    
   }
+
+.everything-else {
+    background-image:url("food2.jpg");
+    height:100vh;
+    justify-content: center;
+}
+
+fieldset {
+  background-color:rgba(145, 217, 164, 0.7);
+  width:100%;
+}
 
 .search div img{
     padding:5px;
@@ -44,6 +57,14 @@
   align-self: center;
   width:40%;
   height: 50px;
+  font-family:cursive;
+  font-size:large;
+  border-style:outset;
+  border-width:3px;
+  border-color:rgb(145, 217, 164);
+}
+.search-button:active{
+  opacity:0.85;
 }
 
 .add-button{
