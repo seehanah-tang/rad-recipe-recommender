@@ -11,22 +11,34 @@ export function GalleryHome() {
     const navigate = useNavigate()
 
     return (
-        <div className="user-div" >
-            <Title />
-            <Navbar/>
-            <div className="user-text">Enter someone else's UID to look into their profile.</div>
+      <div className="user-div">
+        <Title />
+        <Navbar />
+        <div className="everything-else">
+          <fieldset>
+            <div className="user-text">
+              Enter someone else's user ID to view their profile!
+            </div>
+
             <input
-                className="user-id-search"
-                value={queriedID}
-                placeholder="Enter a user's profile UID"
-                onChange={(ev) => setQueriedID(ev.target.value)}
-                aria-label={'searchbar'}>
-            </input>
-            <button 
+              className="user-id-search"
+              value={queriedID}
+              placeholder="Enter a user ID..."
+              onChange={(ev) => setQueriedID(ev.target.value)}
+              aria-label={"searchbar"}
+            ></input>
+          </fieldset>
+          <button
             className="gallery-button"
             aria-label="press to search for user gallery"
-            onClick={() => {navigate('/gallery/' + queriedID)}}> Send me to the site</button>
+            onClick={() => {
+              navigate("/gallery/" + queriedID);
+            }}
+          >
+            Search user
+          </button>
         </div>
+      </div>
     );
   }
 

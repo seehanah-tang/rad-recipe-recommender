@@ -36,6 +36,10 @@
     padding: 10px;
 }
 
+.everything-else {
+    background-image:url("food2.jpg");
+}
+
 .user-div{
     display:block;
     margin:auto;
@@ -43,10 +47,17 @@
 
 .gallery-button{
     display: block;
-    height: 50px;
-    width:25%;
+    width:40%;
+  height: 50px;
     margin: auto;
     font-family: "Comic Sans MS", "Comic Sans", cursive;
     font-size: large;
-
+    margin-top:10px;
+      border-style:outset;
+  border-width:3px;
+  border-color:rgb(145, 217, 164);
 }
+.gallery-button:active{
+  opacity:0.85;
+}
+

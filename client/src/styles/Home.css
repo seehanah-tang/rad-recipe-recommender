@@ -1,27 +1,68 @@
 /* Styling for buttons and gradient */
 button {
-    background-color: #C7DCBB;
+    background-color: #96c27c;
     color: #601B14;
-    border:none;
+    border:100px;
     text-decoration: none;
     display: inline;
     flex-direction: row;
     flex-wrap: wrap;
     text-align: center;
     padding: 14px 16px;
-    border-radius: 50px;
+    border-radius: 200px;
+    font-weight: bold;
+    margin:5px;
+    font-size:16px;
+    border-style:outset;
+  border-width:2px;
+  border-color:rgb(145, 217, 164);
+}
+button:active{
+  opacity:0.85;
+
 }
 
 button:hover {
     background-color: #9EB497;
 }
 
+.content{
+    display:flex;
+    justify-content: space-between;
+}
+
+.left-item, .right-item {
+    align-self: flex-start;
+}
+
+
+.left-item{
+    flex:4;
+    background-image:url("food2.jpg");   
+    /* background-repeat:repat; */
+    height:100vh;
+    font-weight: bold;
+}
+
+
+.right-item{
+    background-color:rgb(208, 210, 133);
+    opacity:100%;
+    height:100vh;
+    margin-top: 0;
+    font-weight:bold;
+}
+
+.userWelcome {
+    text-align:left;
+    margin-right:50px;
+    margin-left:10px;
+}
+
 body {
-    color:#601B14;
-    background: rgb(254,252,252);
-    background: linear-gradient(rgba(254,252,252,1) 2%, rgba(254,245,240,1) 29%, rgba(253,231,210,1) 84%);
+    color:#342c05;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-size: cover;
 }
 
 .my-recipelist{
@@ -32,6 +73,7 @@ body {
     text-align: justify;
     width: [width of img];
 }
+
 
 .my-recipelist div img{
     padding:5px;

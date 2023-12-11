@@ -18,6 +18,10 @@
 }
 
 
+.everything-else {
+    background-image:url("food2.jpg");
+}
+
 .friends-div{
     display:block;
     width: 75%;
@@ -28,12 +32,20 @@
 }
 .add-friends-button{
     display: block;
-    height: 50px;
-    width:25%;
+    width:40%;
+  height: 50px;
     margin: auto;
+    margin-top:10px;
     font-family: "Comic Sans MS", "Comic Sans", cursive;
     font-size: large;
+    border-style:outset;
+    border-width:3px;
+    border-color:rgb(145, 217, 164);
 }
+.add-friends-button:active{
+  opacity:0.85;
+}
+
 .friend-text{
     display:block;
     width:40%;

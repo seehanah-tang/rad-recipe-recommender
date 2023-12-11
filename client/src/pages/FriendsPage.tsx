@@ -138,25 +138,33 @@ function FriendsPage() {
     console.log("Safeguard! (This is used to check how many times the page is reloaded...)")
 
     return (
-        <div>
-            <Title />
-            <Navbar/>
-            <div
-            className="friend-text"
-            >Add more friends!</div>
+      <div>
+        <Title />
+        <Navbar />
+        <div className="everything-else">
+          <fieldset>
+            <div className="friend-text">Add more friends!</div>
             <input
-                className="friends-div"
-                value={queriedID}
-                placeholder="Enter a friend's UID!"
-                onChange={(ev) => setQueriedID(ev.target.value)}
-                aria-label={'friend searchbar'}>
-            </input>
-            <button 
+              className="friends-div"
+              value={queriedID}
+              placeholder="Enter a friend's UID!"
+              onChange={(ev) => setQueriedID(ev.target.value)}
+              aria-label={"friend searchbar"}
+            ></input>
+          </fieldset>
+          <button
             className="add-friends-button"
-            onClick={() => {sendFriendRequest(queriedID, setAlert); setQueriedID('')}}> Send Friend Request</button>
-            <p>{alert}</p>
-            <div>{friendList}</div>
+            onClick={() => {
+              sendFriendRequest(queriedID, setAlert);
+              setQueriedID("");
+            }}
+          >
+            Send Friend Request
+          </button>
+          <p>{alert}</p>
+          <div>{friendList}</div>
         </div>
+      </div>
     );
   }
 
