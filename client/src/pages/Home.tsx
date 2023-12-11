@@ -58,7 +58,7 @@ function Home() {
     const devRef = firebase.firestore().collection("user_accounts")
 
 
-    interface EditBoxProps {
+    interface EditBoxProps {  
         localName : string | undefined,
         localSetName : Dispatch<SetStateAction<string | undefined>>,
         ariaLabel : string
