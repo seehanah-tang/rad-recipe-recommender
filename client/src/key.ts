@@ -1,4 +1,5 @@
-const API_KEY = "664786ebe5b74e59af07c4d57bf08374";
+// const API_KEY = "664786ebe5b74e59af07c4d57bf08374";
+const API_KEY = "b2859d08e6fd4697bb705d5e904cea81";
 
 export { API_KEY };
 

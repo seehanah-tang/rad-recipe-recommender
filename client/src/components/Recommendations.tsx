@@ -1,6 +1,6 @@
 import { UserData } from "../interfaces/MultifactedUser";
 import firebase from "../firebase/Firebase";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../styles/Recommendations.css";
 
 const counter = (array: string[]) => {

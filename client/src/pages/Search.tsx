@@ -7,71 +7,7 @@ import authRefHelper from "../firebase/AuthRefHelper";
 import "../styles/searchStyles.css";
 import Title from "../components/Title";
 import { API_KEY } from "../key";
-
-/**
- * Interface that helps with state changes for the controlled input
- */
-interface ControlledInputProps {
-  value: string;
-  setValue: Dispatch<SetStateAction<string>>;
-  ariaLabel: string;
-}
-
-/**
- * Sets up an input box that will be used to pass in commands
- *
- * @returns HTML element that contains a input box
- */
-function ControlledInput({ value, setValue, ariaLabel }: ControlledInputProps) {
-  return (
-    <input
-      className="search-input-box"
-      value={value}
-      placeholder="Enter something (ingredients, recipe names, etc.) to search"
-      onChange={(ev) => setValue(ev.target.value)}
-      aria-label={ariaLabel}
-    ></input>
-  );
-}
-
-interface InputBoxProps {
-  addSearchTerm: (guess: string) => any;
-}
-
-/**
- *
- * sets up the inut box as well as a button that executes the command
- * @returns HTML element with the input box and the execute command button
- */
-function InputBox({ addSearchTerm }: InputBoxProps) {
-  const [value, setValue] = useState("");
-  return (
-    <div className="search-bar">
-      <div className="search-bar-input">
-        <fieldset>
-          <div className="user-text">Search for recipes!</div>
-          <ControlledInput
-            value={value}
-            setValue={setValue}
-            ariaLabel={"Search box, look up some recipe recommendations"}
-          />
-        </fieldset>
-      </div>
-      <div>
-        <button
-          onClick={() => {
-            addSearchTerm(value);
-            setValue("");
-          }}
-          className="search-button"
-          aria-label={"search button"}
-        >
-          {"Search"}
-        </button>
-      </div>
-    </div>
-  );
-}
+import { Select } from "@chakra-ui/react";
 
 interface ControlledImageProps {
   link: string;
@@ -109,6 +45,7 @@ interface ControlledTitleProps {
 function ControlledTitle({ title }: ControlledTitleProps) {
   return <p className="image-title">{title}</p>;
 }
+
 /**
  * creates a list of search result divs and allows for them to be displayed. Also adds the show to a users
  * recipelist.
@@ -177,7 +114,6 @@ async function CreateSearchResults(
       } catch (error) {
         console.error("Error fetching source URL:", error);
       }
-    
     }
     setItems(imDiv);
   } else {
@@ -194,6 +130,7 @@ async function CreateSearchResults(
 export default function SearchPage() {
   //Hooks are created in order to update search term, image links, titles, etc.
   const [term, setTerm] = useState<string>("");
+  const [value, setValue] = useState("");
   const [cuisine, setCuisine] = useState<string>("");
   // const [data, setData] = useState<any[]>([])
   const [itemList, setItemList] = useState<any[]>([]);
@@ -229,7 +166,7 @@ export default function SearchPage() {
   };
 
   // This use effect function updates on the search term and displays new search results as necessary
-  useEffect(() => {
+  function handleSubmit(value: string) {
     // setData([])
     setItemList([]);
     const getInfo = () => {
@@ -238,7 +175,7 @@ export default function SearchPage() {
         "https://api.spoonacular.com/recipes/complexSearch?apiKey=" +
           API_KEY +
           "&query=" +
-          term +
+          value +
           //  "&cuisine=" +
           // cuisine
           "&number=10"
@@ -256,19 +193,70 @@ export default function SearchPage() {
         });
     };
     getInfo();
-  }, [term]);
+  }
 
+  function handleKeyPress(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === "Enter") {
+      handleSubmit(value);
+    }
+  }
 
   return (
     <div className="searchContainer">
       <Title />
       <Navbar />
       <div className="everything-else">
-        <InputBox
-          addSearchTerm={(guess: string) => {
-            setTerm(guess);
-          }}
-        />
+        <div className="search-bar">
+          <div className="search-bar-input">
+            <fieldset>
+              <div className="user-text">Search for recipes!</div>
+              <div className="drop-downs">
+                <Select
+                  width={180}
+                  padding={10}
+                  placeholder={"Filter for cuisine"}
+                >
+                  <option>Chinese</option>
+                  <option>Japanese</option>
+                  <option>Korean</option>
+                  <option>Italian</option>
+                </Select>
+                <Select
+                  width={180}
+                  padding={10}
+                  placeholder={"Filter for dietary restrictions"}
+                >
+                  <option>Vegan</option>
+                  <option>Gluten-free</option>
+                  <option>Vegetarian</option>
+                  <option>Halal</option>
+                  <option>Kosher</option>
+                </Select>
+              </div>
+
+              <input
+                className="search-input-box"
+                value={value}
+                placeholder="Enter something (ingredients, recipe names, etc.) to search"
+                onChange={(ev) => setValue(ev.target.value)}
+                aria-label={"Search box, look up some recipe recommendations"}
+                onKeyPress={(e) => handleKeyPress(e)}
+              ></input>
+            </fieldset>
+          </div>
+          <div>
+            <button
+              onClick={() => {
+                handleSubmit(value);
+                setValue("");
+              }}
+              className="search-button"
+              aria-label={"search button"}
+            >
+              {"Search"}
+            </button>
+          </div>
+        </div>
         <div className="search">{itemList}</div>
       </div>
     </div>
