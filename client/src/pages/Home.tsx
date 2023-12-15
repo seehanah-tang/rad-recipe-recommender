@@ -69,9 +69,7 @@ function Home() {
   // to access both information relating to the GoogleUser and the FirebaseUser.
   const [googleUser, setGoogleUser] = useState<any>(null);
   const [fbUser, setFBUser] = useState<UserData>();
-  useEffect(() => {
-    authRefHelper(setGoogleUser, setFBUser);
-  }, []);
+  useEffect(() => {authRefHelper(setGoogleUser, setFBUser)}, [])
   useEffect(() => {
     getIncomingFriends();
     returnListByID(fbUser?.id ?? "x", setList);

@@ -27,7 +27,6 @@ export function authRefHelper(
         if (doc.exists) {
           const dataBlock = doc.data();
           if (dataBlock !== undefined) {
-            // TODO: edit this
             const multifactedUser: UserData = {
               name: dataBlock.name,
               email: dataBlock.email,
@@ -50,9 +49,7 @@ export function authRefHelper(
   };
 }
 
-// TODO: and edit this
 export function createAccountOrLogin(googleUser: any, uid: string) {
-  // TODO: edit this for recipes
   const generateAccount = ({
     name,
     email,
