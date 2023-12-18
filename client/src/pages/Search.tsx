@@ -132,6 +132,7 @@ export default function SearchPage() {
   const [term, setTerm] = useState<string>("");
   const [value, setValue] = useState("");
   const [cuisine, setCuisine] = useState<string>("");
+  const [restriction, setRestriction] = useState<string>("");
   // const [data, setData] = useState<any[]>([])
   const [itemList, setItemList] = useState<any[]>([]);
   const [googleUser, setGoogleUser] = useState<any>(null);
@@ -170,14 +171,28 @@ export default function SearchPage() {
     // setData([])
     setItemList([]);
     const getInfo = () => {
+      console.log(cuisine);
+      console.log(
+        "https://api.spoonacular.com/recipes/complexSearch?apiKey=" +
+          API_KEY +
+          "&query=" +
+          value +
+          "&cuisine=" +
+          cuisine +
+          "&diet=" +
+          restriction +
+          "&number=10"
+      );
       // TODO: edit this for more filters
       fetch(
         "https://api.spoonacular.com/recipes/complexSearch?apiKey=" +
           API_KEY +
           "&query=" +
           value +
-          //  "&cuisine=" +
-          // cuisine
+          "&cuisine=" +
+          cuisine +
+          "&diet=" +
+          restriction +
           "&number=10"
       )
         .then((r) => r.json())
@@ -215,22 +230,23 @@ export default function SearchPage() {
                   width={180}
                   padding={10}
                   placeholder={"Filter for cuisine"}
+                  onChange={(ev) => setCuisine(ev.target.value)}
                 >
                   <option>Chinese</option>
                   <option>Japanese</option>
                   <option>Korean</option>
                   <option>Italian</option>
+                  <option>Mexican</option>
                 </Select>
                 <Select
                   width={180}
                   padding={10}
                   placeholder={"Filter for dietary restrictions"}
+                  onChange={(ev) => setRestriction(ev.target.value)}
                 >
                   <option>Vegan</option>
-                  <option>Gluten-free</option>
                   <option>Vegetarian</option>
-                  <option>Halal</option>
-                  <option>Kosher</option>
+                  <option>Pescetarian</option>
                 </Select>
               </div>
 
