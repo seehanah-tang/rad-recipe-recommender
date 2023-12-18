@@ -232,11 +232,14 @@ export default function SearchPage() {
                   placeholder={"Filter for cuisine"}
                   onChange={(ev) => setCuisine(ev.target.value)}
                 >
+                  <option>Asian</option>
                   <option>Chinese</option>
                   <option>Japanese</option>
                   <option>Korean</option>
                   <option>Italian</option>
                   <option>Mexican</option>
+                  <option>European</option>
+                  <option>Indian</option>
                 </Select>
                 <Select
                   width={180}
