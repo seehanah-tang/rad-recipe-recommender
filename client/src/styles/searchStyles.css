@@ -2,17 +2,18 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 10px;
-  margin: 10px;
+  padding:20px;
+  margin: 5px;
   text-align: justify;
   width: [width of img];
 }
 
 .everything-else {
   background-image: url("food2.jpg");
-  height: 100vh;
   justify-content: center;
-  background-attachment: fixed;
+  background-attachment:scoll;
+  background-repeat:repeat;
+  background-size:100vh;
 }
 
 fieldset {
@@ -21,13 +22,18 @@ fieldset {
 }
 
 .search div img {
-  padding: 5px;
+  padding: 20px;
+  padding-bottom:0px;
   width: auto;
 }
 .image-title {
   display: block;
   width: 200px;
-  margin: 0px;
+  margin-left:30px;
+  margin-top:0px;
+  margin-bottom:3px;
+  font-weight:bold;
+  /* background-color: aliceblue; */
 }
 
 .search-input-box {

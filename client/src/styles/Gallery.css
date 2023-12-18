@@ -38,6 +38,7 @@
 
 .everything-else {
     background-image:url("food2.jpg");
+    background-attachment:scroll;
 }
 
 .user-div{
