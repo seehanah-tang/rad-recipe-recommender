@@ -62,28 +62,33 @@ async function CreateSearchResults(
   if (data[0] !== undefined) {
     for (let i = 0; i < data.length; i++) {
       let sourceURL = "";
-      try {
-        const response = await fetch(
-          "https://api.spoonacular.com/recipes/" +
-            data[i].id +
-            "/information?apiKey=" +
-            API_KEY +
-            "&includeNutrition=false"
-        );
+      if (data[i].id !== undefined) {
+        try {
+          const response = await fetch(
+            "https://api.spoonacular.com/recipes/" +
+              data[i].id +
+              "/information?apiKey=" +
+              API_KEY +
+              "&includeNutrition=false"
+          );
 
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+
+          const responseObject = await response.json();
+          sourceURL = responseObject.sourceUrl;
+          data[i].url = sourceURL;
+        } catch (error) {
+          console.error("Error fetching source URL:", error);
         }
-
-        const responseObject = await response.json();
-        sourceURL = responseObject.sourceUrl;
 
         imDiv.push(
           <div>
             <ControlledImage
               link={data[i].image}
               altText={"cover picture of " + data[i].title}
-              malLink={sourceURL}
+              malLink={data[i].url}
             />
             <br></br>
             <ControlledTitle title={data[i].title} />
@@ -111,9 +116,7 @@ async function CreateSearchResults(
             </button>
           </div>
         );
-      } catch (error) {
-        console.error("Error fetching source URL:", error);
-      }
+      } 
     }
     setItems(imDiv);
   } else {
@@ -146,25 +149,38 @@ export default function SearchPage() {
    */
   const devRef = firebase.firestore().collection("user_accounts");
   const addToAccount = (recipeBlock: RecipeData) => {
+    console.log("Adding to account:", recipeBlock);
     devRef
       .doc(googleUser?.uid)
       .get()
       .then((doc) => {
         const datablock = doc.data();
+        console.log(datablock);
         if (datablock !== undefined) {
           if (datablock.recipe_list !== undefined) {
-            devRef.doc(googleUser?.uid).update({
-              recipe_list:
-                firebase.firestore.FieldValue.arrayUnion(recipeBlock),
-            });
+            console.log("recipe list exists: adding to recipe list");
+            if (recipeBlock !== undefined) {
+              devRef.doc(googleUser?.uid).update({
+                recipe_list:
+                  firebase.firestore.FieldValue.arrayUnion(recipeBlock),
+              });
+            } else {
+              console.error("recipeBlock is undefined");
+              // Handle the case where recipeBlock is undefined
+            }
           } else {
+            console.log("adding to recipe list");
             devRef.doc(googleUser?.uid).update({
               recipe_list: [recipeBlock],
             });
           }
         }
+      })
+      .catch((error) => {
+        console.error("Error fetching document:", error);
       });
   };
+
 
   // This use effect function updates on the search term and displays new search results as necessary
   function handleSubmit(value: string) {
