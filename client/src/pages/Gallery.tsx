@@ -15,6 +15,7 @@ export function GalleryHome() {
         <Title />
         <Navbar />
         <div className="everything-else">
+          <div className="search-bar-input">
           <fieldset>
             <div className="user-text">
               Enter someone else's user ID to view their profile!
@@ -27,7 +28,9 @@ export function GalleryHome() {
               onChange={(ev) => setQueriedID(ev.target.value)}
               aria-label={"searchbar"}
             ></input>
+           
           </fieldset>
+          </div>
           <button
             className="gallery-button"
             aria-label="press to search for user gallery"
@@ -83,14 +86,26 @@ export function IndividualGallery() {
     returnListByID(queriedID, setItemList)
 
     return (
-        <div>
-            <Title />
-            <Navbar/>
-            <div
-            className='my-recipelist'
-            aria-label='my recipelist'>{itemList}</div>
-            
-            <button onClick={() => {navigate(-1)}}> Take me back </button>
+      <div>
+        <Title />
+        <Navbar />{" "}
+        <div className="everything-else">
+          <div className="my-recipelist" aria-label="my recipelist">
+            {itemList}
+          </div>
+
+          <div className="back-button-container">
+            <button
+              className="back-button"
+              onClick={() => {
+                navigate(-1);
+              }}
+            >
+              {" "}
+              Take me back{" "}
+            </button>
+          </div>
         </div>
+      </div>
     );
 }

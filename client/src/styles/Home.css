@@ -31,6 +31,10 @@ button:hover {
     justify-content: space-between;
 }
 
+.homepage {
+    font-family:cursive;
+}
+
 .left-item, .right-item {
     align-self: flex-start;
 }
@@ -44,19 +48,31 @@ button:hover {
     font-weight: bold;
 }
 
+.button-holder {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
 
 .right-item{
-    background-color:rgb(208, 210, 133);
+    background-color:rgb(220, 231, 213);
     opacity:100%;
     height:100vh;
+    
     margin-top: 0;
     font-weight:bold;
+    align-items:center;
+    justify-content:center;
 }
 
 .userWelcome {
     text-align:left;
     margin-right:50px;
     margin-left:10px;
+    text-align: center; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 body {
@@ -67,15 +83,38 @@ body {
 
 .my-recipelist{
     display: flex;
-    flex-direction:row;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
     padding: 10px;
-    text-align: justify;
-    width: [width of img];
+}
+
+.my-recipelist div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 
 .my-recipelist div img{
+    padding:5px;
+    width:auto;
+}
+
+.incoming-friends{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.incoming-friends div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.incoming-friends div img{
     padding:5px;
     width:auto;
 }

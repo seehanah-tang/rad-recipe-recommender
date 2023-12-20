@@ -122,7 +122,7 @@ async function CreateSearchResults(
   } else {
     let notFoundDiv = [];
     notFoundDiv.push(
-      <div>
+      <div className="alert">
         <p>No matching recipes! Check your spelling or widen your search.</p>
       </div>
     );
