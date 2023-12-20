@@ -5,7 +5,7 @@ ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    background-color: #C7DCBB;
+    background-color: rgb(75, 46, 20);
   }
   
 li {
@@ -14,7 +14,7 @@ li {
 
 li a {
   display: block;
-  color: #601B14;
+  color: rgb(211, 188, 161);
   padding: 14px 74px;
   font-family:cursive;
   font-weight:bold;
@@ -22,5 +22,5 @@ li a {
 }
 
 li a:hover {
-  background-color: #9EB497;
+  background-color: rgb(192, 168, 116);
 }

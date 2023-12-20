@@ -20,7 +20,7 @@
 }
 
 fieldset {
-  background-color: rgba(145, 217, 164, 0.7);
+  background-color: rgb(211, 188, 161);
   width: 100%;
 }
 
@@ -96,7 +96,7 @@ fieldset {
   font-size: large;
   border-style: outset;
   border-width: 3px;
-  border-color: rgb(145, 217, 164);
+  border-color: rgb(174, 168, 121);
 }
 .search-button:active {
   opacity: 0.85;
