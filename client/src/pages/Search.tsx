@@ -103,7 +103,7 @@ async function CreateSearchResults(
                       title: ref.title,
                       thumbnail: ref.image,
                       url: ref.url,
-                      // cuisine: ,
+                      //cuisine: ref.cuisine,
                     };
                     addToAcc(recipeBlock);
                   } catch (error) {
@@ -116,7 +116,7 @@ async function CreateSearchResults(
             </button>
           </div>
         );
-      } 
+      }
     }
     setItems(imDiv);
   } else {
@@ -180,7 +180,6 @@ export default function SearchPage() {
         console.error("Error fetching document:", error);
       });
   };
-
 
   // This use effect function updates on the search term and displays new search results as necessary
   function handleSubmit(value: string) {

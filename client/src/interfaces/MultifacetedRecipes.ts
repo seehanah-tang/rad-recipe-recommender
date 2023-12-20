@@ -3,5 +3,5 @@ export interface RecipeData {
   title: string;
   thumbnail: string;
   url: string;
-  // cuisine:string;
+  //cuisine: string;
 }
