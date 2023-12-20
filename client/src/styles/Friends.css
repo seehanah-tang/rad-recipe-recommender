@@ -12,11 +12,27 @@
     width:auto;
 }
 
+.alert-text {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 20px;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-size:large;
+
+}
+
 .friend-title{
     display: block;
     width: 200px;
+    font-weight:bold;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+
 }
 
+.remove-friend-button {
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-size:medium;
+}
 
 .everything-else {
     background-image:url("food2.jpg");
@@ -33,7 +49,7 @@
 .add-friends-button{
     display: block;
     width:40%;
-  height: 50px;
+    height: 50px;
     margin: auto;
     margin-top:10px;
     font-family: "Comic Sans MS", "Comic Sans", cursive;
@@ -48,9 +64,32 @@
 
 .friend-text{
     display:block;
-    width:40%;
-    margin-left:45%;
+    text-align: center;
     font-size: larger;
     font-family: "Comic Sans MS", "Comic Sans", cursive;
     padding: 10px;
+}
+
+.friendlist{
+    font-size:larger;
+    margin:20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center-align the items horizontally */
+    align-items: center;
+}
+
+.friendlist > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center-align the items horizontally within each div */
+  margin: 10px; /* Add margin for spacing between items */
+  text-align: center; /* Center-align text content */
+}
+
+.search-bar-input {
+  display: block;
+  width: 75%;
+  margin: auto;
+  padding-top: 10px;
 }

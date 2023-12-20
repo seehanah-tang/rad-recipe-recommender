@@ -8,6 +8,13 @@
     width: [width of img];
 }
 
+.search-bar-input {
+  display: block;
+  width: 75%;
+  margin: auto;
+  padding-top: 10px;
+}
+
 .my-recipelist div img{
     padding:5px;
     width:auto;
@@ -29,9 +36,8 @@
 
 .user-text{
     display:block;
-    width:40%;
-    margin-left:36%;
     font-size: larger;
+    text-align:center;
     font-family: "Comic Sans MS", "Comic Sans", cursive;
     padding: 10px;
 }
@@ -49,16 +55,28 @@
 .gallery-button{
     display: block;
     width:40%;
-  height: 50px;
+    height: 50px;
     margin: auto;
     font-family: "Comic Sans MS", "Comic Sans", cursive;
     font-size: large;
     margin-top:10px;
-      border-style:outset;
-  border-width:3px;
-  border-color:rgb(145, 217, 164);
+    border-style:outset;
+    border-width:3px;
+    border-color:rgb(145, 217, 164);
+    text-align: center;
 }
+
 .gallery-button:active{
   opacity:0.85;
+}
+
+.back-button {
+    text-align: center;
+}
+
+.back-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; 
 }
 

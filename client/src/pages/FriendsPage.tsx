@@ -100,7 +100,7 @@ function FriendsPage() {
                                             referrerPolicy="no-referrer"/>
                                         <br></br>
                                         <p className='friend-title'>{updatedFriend[i].name}</p>
-                                        <button onClick={()=>{removeFriend(friendID)}}>REMOVE FRIEND??</button>
+                                        <button className="remove-friend-button" onClick={()=>{removeFriend(friendID)}}>Remove Friend</button>
                                     </div>
                                 )
                             }
@@ -142,16 +142,18 @@ function FriendsPage() {
         <Title />
         <Navbar />
         <div className="everything-else">
-          <fieldset>
-            <div className="friend-text">Add more friends!</div>
-            <input
-              className="friends-div"
-              value={queriedID}
-              placeholder="Enter a friend's UID!"
-              onChange={(ev) => setQueriedID(ev.target.value)}
-              aria-label={"friend searchbar"}
-            ></input>
-          </fieldset>
+          <div className="search-bar-input">
+            <fieldset>
+              <div className="friend-text">Add more friends!</div>
+              <input
+                className="friends-div"
+                value={queriedID}
+                placeholder="Enter a friend's user ID!"
+                onChange={(ev) => setQueriedID(ev.target.value)}
+                aria-label={"friend searchbar"}
+              ></input>
+            </fieldset>
+          </div>
           <button
             className="add-friends-button"
             onClick={() => {
@@ -161,8 +163,8 @@ function FriendsPage() {
           >
             Send Friend Request
           </button>
-          <p>{alert}</p>
-          <div>{friendList}</div>
+          <p className="alert-text">{alert}</p>
+          <div className="friendlist">{friendList}</div>
         </div>
       </div>
     );

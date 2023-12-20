@@ -36,7 +36,7 @@ function returnListByID(id: string, iSetter: (newItems: any[]) => any) {
                   <div className="recipe-title" aria-label="recipe title">
                     {recList[i].title}
                   </div>
-                  <button
+                  <button className="button-container"
                     onClick={() => {
                       devRef.doc(id).update({
                         recipe_list: firebase.firestore.FieldValue.arrayRemove(
@@ -214,7 +214,11 @@ function Home() {
       </div>
       <div className="content">
         <div className="left-item">
-          Recommended Recipes (based on your friends)!
+          <p
+            style={{ margin: "10px", fontSize: "large", fontFamily: "cursive" }}
+          >
+            Recommended recipes (based on your friends):
+          </p>
           <Recommendations userObject={fbUser}></Recommendations>
         </div>
 
@@ -228,7 +232,7 @@ function Home() {
             <br></br>
             <p>User ID: {fbUser?.id}</p>
 
-            <div>
+            <div className="button-holder">
               <button
                 onClick={() => {
                   const change = document.getElementById("editBox");
@@ -258,12 +262,14 @@ function Home() {
             />
           </div>
           <div className="userWelcome">
-            <p>Your Recipe List:</p>
+            <p>Your Recipe List (click to open recipe!):</p>
             <div className="my-recipelist" aria-label="my recipelist">
               {userList}
             </div>
-            <p>Incoming Friend Requests:</p>
-            <div>{incomingFriends}</div>
+            <div className="incoming-friends">
+              <p>Incoming Friend Requests (click to accept!):</p>
+              <div>{incomingFriends}</div>
+            </div>
           </div>
         </div>
       </div>
