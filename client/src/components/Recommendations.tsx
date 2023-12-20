@@ -45,11 +45,11 @@ function Recommendations(userObject: any) {
       )
       .then((friendLists) => {
         // Generates a count of how many times each genre appear in each person's list.
-        const genreCountsCounter = friendLists.map(function (doc) {
+        const cruisinCountsCounter = friendLists.map(function (doc) {
           return counter(
             doc
               .map(function (inner: any) {
-                return inner.genres;
+                return inner.cruisin;
               })
               .flat(2)
           );

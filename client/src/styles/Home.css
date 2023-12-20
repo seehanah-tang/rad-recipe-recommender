@@ -46,6 +46,8 @@ button:hover {
     /* background-repeat:repat; */
     height:100vh;
     font-weight: bold;
+    background-attachment: fixed; /* Set the background attachment to fixed */
+    overflow-y: scroll;
 }
 
 .button-holder {
@@ -63,6 +65,7 @@ button:hover {
     font-weight:bold;
     align-items:center;
     justify-content:center;
+    overflow-y: scroll;
 }
 
 .userWelcome {
