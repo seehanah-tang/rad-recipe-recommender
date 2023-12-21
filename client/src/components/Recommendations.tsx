@@ -50,16 +50,25 @@ function Recommendations(userObject: any) {
       )
       .then((friendLists) => {
         // Generates a count of how many times each cuisine appear in each person's list.
-        const cuisineCountsCounter = friendLists.map(function (doc) {
+        let cuisineCountsCounter = friendLists.map(function (doc) {
           return counter(
             doc
               .map(function (inner: any) {
-                console.log(inner.cuisines);
-                return inner.cuisines;
+                if (inner.cuisines !== "") {
+                  console.log(inner.cuisines);
+                  return inner.cuisines;
+                }
               })
               .flat(2)
           );
         });
+
+        // Filter out the key-value pair with an empty string key
+        // cuisineCountsCounter = Object.fromEntries(
+        //   Object.entries(cuisineCountsCounter).filter(
+        //     ([key, value]) => key !== ""
+        //   )
+        // );
         console.log(cuisineCountsCounter);
         // Compiles them into the max cuisine for each person
         const argMax = cuisineCountsCounter.map(function (cuisineCounts) {
@@ -67,12 +76,12 @@ function Recommendations(userObject: any) {
             a[1] > b[1] ? a : b
           )[0];
         });
-        // console.log(argMax)
+        console.log(argMax);
         // Compiles them into the max cuisine amongst all friends
         const topCuisine = Object.entries(counter(argMax)).reduce(
           (a: any, b: any) => (a[1] > b[1] ? a : b)
         )[0];
-        // console.log(topCuisine)
+        console.log(topCuisine);
         // Filters user lists to only derive shows of the top cuisine
         const friendsOnlyTopCuisine = friendLists.map(function (doc) {
           return doc.filter(function (recipe: any) {
@@ -150,7 +159,7 @@ function Recommendations(userObject: any) {
             </div>
           );
         }
-        setRecommendList(reccDiv.slice(0, 3));
+        setRecommendList(reccDiv.slice(0, 5));
       });
   };
 
