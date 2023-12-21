@@ -49,7 +49,7 @@ function Recommendations(userObject: any) {
           return counter(
             doc
               .map(function (inner: any) {
-                return inner.genres;
+                return inner.cruisin;
               })
               .flat(2)
           );
