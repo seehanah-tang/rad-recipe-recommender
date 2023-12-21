@@ -61,7 +61,6 @@ async function CreateSearchResults(
   let imDiv = [];
   if (data[0] !== undefined) {
     for (let i = 0; i < data.length; i++) {
-      let sourceURL = "";
       if (data[i].id !== undefined) {
         try {
           const response = await fetch(
@@ -77,8 +76,9 @@ async function CreateSearchResults(
           }
 
           const responseObject = await response.json();
-          sourceURL = responseObject.sourceUrl;
-          data[i].url = sourceURL;
+          data[i].url = responseObject.sourceUrl;
+          data[i].score = responseObject.spoonacularScore;
+          data[i].cuisines = responseObject.cuisines;
         } catch (error) {
           console.error("Error fetching source URL:", error);
         }
@@ -103,7 +103,8 @@ async function CreateSearchResults(
                       title: ref.title,
                       thumbnail: ref.image,
                       url: ref.url,
-                      //cuisine: ref.cuisine,
+                      cuisines: ref.cuisines,
+                      score: ref.score,
                     };
                     addToAcc(recipeBlock);
                   } catch (error) {
@@ -132,7 +133,6 @@ async function CreateSearchResults(
 
 export default function SearchPage() {
   //Hooks are created in order to update search term, image links, titles, etc.
-  const [term, setTerm] = useState<string>("");
   const [value, setValue] = useState("");
   const [cuisine, setCuisine] = useState<string>("");
   const [restriction, setRestriction] = useState<string>("");

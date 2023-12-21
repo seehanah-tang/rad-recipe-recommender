@@ -1,6 +1,6 @@
 import { UserData } from "../interfaces/MultifactedUser";
 import firebase from "../firebase/Firebase";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../styles/Recommendations.css";
 
 const counter = (array: string[]) => {
@@ -17,7 +17,12 @@ const dictCounter = (array: string[]) => {
 
 function Recommendations(userObject: any) {
   const [recommendList, setRecommendList] = useState<any[]>([]);
-  //useEffect(() => {if (user !== undefined && user !== null) {console.log('loading'); loadRecommendations()}}, [userObject.userObject])
+  useEffect(() => {
+    if (user !== undefined && user !== null) {
+      console.log("loading");
+      loadRecommendations();
+    }
+  }, [userObject.userObject]);
 
   let user: UserData = userObject.userObject;
   if (user === undefined || user === null) {
@@ -44,38 +49,39 @@ function Recommendations(userObject: any) {
         })
       )
       .then((friendLists) => {
-        // Generates a count of how many times each genre appear in each person's list.
-        const genreCountsCounter = friendLists.map(function (doc) {
+        // Generates a count of how many times each cuisine appear in each person's list.
+        const cuisineCountsCounter = friendLists.map(function (doc) {
           return counter(
             doc
               .map(function (inner: any) {
-                return inner.cruisin;
+                console.log(inner.cuisines);
+                return inner.cuisines;
               })
               .flat(2)
           );
         });
-        // console.log(genreCountsCounter)
-        // Compiles them into the max genre for each person
-        const argMax = genreCountsCounter.map(function (genreCounts) {
-          return Object.entries(genreCounts).reduce((a: any, b: any) =>
+        console.log(cuisineCountsCounter);
+        // Compiles them into the max cuisine for each person
+        const argMax = cuisineCountsCounter.map(function (cuisineCounts) {
+          return Object.entries(cuisineCounts).reduce((a: any, b: any) =>
             a[1] > b[1] ? a : b
           )[0];
         });
         // console.log(argMax)
-        // Compiles them into the max genre amongst all friends
-        const topGenre = Object.entries(counter(argMax)).reduce(
+        // Compiles them into the max cuisine amongst all friends
+        const topCuisine = Object.entries(counter(argMax)).reduce(
           (a: any, b: any) => (a[1] > b[1] ? a : b)
         )[0];
-        // console.log(topGenre)
-        // Filters user lists to only derive shows of the top genre
-        const friendsOnlyTopGenre = friendLists.map(function (doc) {
+        // console.log(topCuisine)
+        // Filters user lists to only derive shows of the top cuisine
+        const friendsOnlyTopCuisine = friendLists.map(function (doc) {
           return doc.filter(function (recipe: any) {
-            return recipe.genres.includes(topGenre);
+            return recipe.cuisines.includes(topCuisine);
           });
         });
-        // console.log(friendsOnlyTopGenre)
+        // console.log(friendsOnlyTopCuosine)
         // Removes the overlap between the user and their friends' watched shows
-        const flatten = friendsOnlyTopGenre.flat();
+        const flatten = friendsOnlyTopCuisine.flat();
         const userRecipeTitles = user.recipe_list.map(function (recipe) {
           return recipe.title;
         });
@@ -100,19 +106,15 @@ function Recommendations(userObject: any) {
         });
         // Comparator for ranking. As a reminder, b - a implies b > a.
         const mu = 20000; // average ratings required
-        const sigmoid = (ratings: number) => {
-          return 1 / (1 + Math.exp(-(ratings - mu) / 5000));
+        const sigmoid = (score: number) => {
+          return 1 / (1 + Math.exp(-(score - mu) / 5000));
         };
 
         function rankingComparator(a: any, b: any) {
           const aVal =
-            a.score *
-            sigmoid(a.scored_by) *
-            (arrayDifferenceCounter.get(a.title) ?? 1);
+            sigmoid(a.score) * (arrayDifferenceCounter.get(a.title) ?? 1);
           const bVal =
-            b.score *
-            sigmoid(b.scored_by) *
-            (arrayDifferenceCounter.get(b.title) ?? 1);
+            sigmoid(b.score) * (arrayDifferenceCounter.get(b.title) ?? 1);
           return bVal - aVal;
         }
         const orderedRecommendations =
