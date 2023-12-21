@@ -1,13 +1,17 @@
 import firebase from "../firebase/Firebase";
-import { useState, Dispatch, SetStateAction, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { RecipeData } from "../interfaces/MultifacetedRecipes";
 import { UserData } from "../interfaces/MultifactedUser";
 import authRefHelper from "../firebase/AuthRefHelper";
 import "../styles/searchStyles.css";
 import Title from "../components/Title";
-import { API_KEY } from "../key";
+import { API_KEY } from "../private/key";
 import { Select } from "@chakra-ui/react";
+import mock_complexSearch from "../mock/mock_complexSearch.json";
+import mock_information from "../mock/mock_information.json";
+
+const MOCK: boolean = false;
 
 interface ControlledImageProps {
   link: string;
@@ -63,24 +67,30 @@ async function CreateSearchResults(
     for (let i = 0; i < data.length; i++) {
       if (data[i].id !== undefined) {
         try {
-          const response = await fetch(
-            "https://api.spoonacular.com/recipes/" +
-              data[i].id +
-              "/information?apiKey=" +
-              API_KEY +
-              "&includeNutrition=false"
-          );
+          if (MOCK) {
+            data[i].url = mock_information.sourceUrl;
+            data[i].score = mock_information.spoonacularScore;
+            data[i].cuisines = mock_information.cuisines;
+          } else {
+            const response = await fetch(
+              "https://api.spoonacular.com/recipes/" +
+                data[i].id +
+                "/information?apiKey=" +
+                API_KEY +
+                "&includeNutrition=false"
+            );
 
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+
+            const responseObject = await response.json();
+            data[i].url = responseObject.sourceUrl;
+            data[i].score = responseObject.spoonacularScore;
+            data[i].cuisines = responseObject.cuisines;
           }
-
-          const responseObject = await response.json();
-          data[i].url = responseObject.sourceUrl;
-          data[i].score = responseObject.spoonacularScore;
-          data[i].cuisines = responseObject.cuisines;
-        } catch (error) {
-          console.error("Error fetching source URL:", error);
+        } catch (e) {
+          console.log(e);
         }
 
         imDiv.push(
@@ -198,29 +208,37 @@ export default function SearchPage() {
           restriction +
           "&number=10"
       );
-      // TODO: edit this for more filters
-      fetch(
-        "https://api.spoonacular.com/recipes/complexSearch?apiKey=" +
-          API_KEY +
-          "&query=" +
-          value +
-          "&cuisine=" +
-          cuisine +
-          "&diet=" +
-          restriction +
-          "&number=10"
-      )
-        .then((r) => r.json())
-        .then((jr) => {
-          var newData: any[] = [];
-          for (let i = 0; i < 10; i++) {
-            newData.push(jr.results[i]);
-          }
-          return newData;
-        })
-        .then((dataBlock) => {
-          CreateSearchResults(dataBlock, setItemList, addToAccount);
-        });
+
+      if (MOCK) {
+        CreateSearchResults(
+          mock_complexSearch.results.slice(0, 10),
+          setItemList,
+          addToAccount
+        );
+      } else {
+        fetch(
+          "https://api.spoonacular.com/recipes/complexSearch?apiKey=" +
+            API_KEY +
+            "&query=" +
+            value +
+            "&cuisine=" +
+            cuisine +
+            "&diet=" +
+            restriction +
+            "&number=10"
+        )
+          .then((r) => r.json())
+          .then((jr) => {
+            var newData: any[] = [];
+            for (let i = 0; i < 10; i++) {
+              newData.push(jr.results[i]);
+            }
+            return newData;
+          })
+          .then((dataBlock) => {
+            CreateSearchResults(dataBlock, setItemList, addToAccount);
+          });
+      }
     };
     getInfo();
   }

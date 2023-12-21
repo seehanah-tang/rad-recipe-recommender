@@ -36,7 +36,8 @@ function returnListByID(id: string, iSetter: (newItems: any[]) => any) {
                   <div className="recipe-title" aria-label="recipe title">
                     {recList[i].title}
                   </div>
-                  <button className="button-container"
+                  <button
+                    className="button-container"
                     onClick={() => {
                       devRef.doc(id).update({
                         recipe_list: firebase.firestore.FieldValue.arrayRemove(
@@ -69,7 +70,9 @@ function Home() {
   // to access both information relating to the GoogleUser and the FirebaseUser.
   const [googleUser, setGoogleUser] = useState<any>(null);
   const [fbUser, setFBUser] = useState<UserData>();
-  useEffect(() => {authRefHelper(setGoogleUser, setFBUser)}, [])
+  useEffect(() => {
+    authRefHelper(setGoogleUser, setFBUser);
+  }, []);
   useEffect(() => {
     getIncomingFriends();
     returnListByID(fbUser?.id ?? "x", setList);
@@ -215,7 +218,10 @@ function Home() {
       <div className="content">
         <div className="left-item">
           <p
-            style={{ margin: "10px", fontSize: "large", fontFamily: "cursive" }}
+            style={{
+              margin: "10px",
+              fontSize: "large",
+            }}
           >
             Recommended recipes (based on your friends):
           </p>

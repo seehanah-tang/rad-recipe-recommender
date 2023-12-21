@@ -159,7 +159,7 @@ function Recommendations(userObject: any) {
             </div>
           );
         }
-        setRecommendList(reccDiv.slice(0, 5));
+        setRecommendList(reccDiv.slice(0, 6));
       });
   };
 
