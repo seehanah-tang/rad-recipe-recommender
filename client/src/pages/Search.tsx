@@ -11,7 +11,7 @@ import { Select } from "@chakra-ui/react";
 import mock_complexSearch from "../mock/mock_complexSearch.json";
 import mock_information from "../mock/mock_information.json";
 
-const MOCK: boolean = false;
+const MOCK: boolean = true;
 
 interface ControlledImageProps {
   link: string;
