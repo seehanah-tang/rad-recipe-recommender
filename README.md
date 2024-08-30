@@ -1,6 +1,6 @@
 # rad-recipe-recommender
 
-Our final project for CS32 features a recipe recommender and social web app for food lovers!
+A recipe recommender and social web app for food lovers!
 
 ## Project Overview
 
